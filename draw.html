@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Draw Shapes</title>
+    <link rel="stylesheet" data-purpose="Layout StyleSheet" title="Web Awesome" href="/css/app-wa-d53d10572a0e0d37cb8d614a3f177a0c.css?vsn=d">
+    <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.5.2/css/all.css">
+    <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.5.2/css/sharp-thin.css">
+    <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.5.2/css/sharp-solid.css">
+    <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.5.2/css/sharp-regular.css">
+    <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.5.2/css/sharp-light.css">
+    <style>
+        canvas {
+            border: 1px solid black;
+        }
+        body{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            background: #2f2f2f;
+            height: 100vh;
+            width: 100%;
+
+        }
+        h1 {
+            color: white;
+        }
+        canvas {
+            border: 10px solid white;
+        }
+        .buttons {
+            margin-top: 50px;
+            display: flex;
+            width: 600px;
+            justify-content: end;
+            align-items: center;
+            gap: 50px;
+        }
+        #saveBtn {
+            height: 50px;
+            width: 200px;
+            border: none;
+            background-color: #fafafa;
+            color: #2f2f2f;
+            font-size: 20px;
+            cursor: pointer;
+        }
+        #undoBtn {
+            height: 50px;
+            width: 50px;
+            transform: rotate(180deg);
+            color: #2f2f2f;
+            border-radius: 100%;
+            border: none;
+            font-size: 30px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <h1>Отметьте дефекты на изображении</h1>
+    <canvas id="drawingCanvas" width="600" height="400"></canvas>
+    <div class="buttons">
+        <button id="undoBtn"><i class="fa-solid fa-arrow-right"></i></button>
+        <button id="saveBtn">Сохранить</button>
+    </div>
+
+    <script>
+        const canvas = document.getElementById('drawingCanvas');
+        const context = canvas.getContext('2d');
+        const undoStack = [];
+        const shapes = [];
+        let isDrawing = false;
+        let startX, startY;
+
+        // Загрузка изображения
+        const urlParams = new URLSearchParams(window.location.search);
+        const imageUrl = urlParams.get('image');
+        let image = new Image();
+        if (imageUrl) {
+            image.src = imageUrl;
+            image.onload = () => {
+                context.drawImage(image, 0, 0, canvas.width, canvas.height);
+                saveState();
+            };
+        }
+
+        function saveState() {
+            undoStack.push({
+                shapes: [...shapes],
+                image: context.getImageData(0, 0, canvas.width, canvas.height)
+            });
+        }
+
+        function undo() {
+            if (undoStack.length > 0) {
+                const lastState = undoStack.pop();
+                shapes.length = 0;
+                shapes.push(...lastState.shapes);
+                context.putImageData(lastState.image, 0, 0);
+            }
+        }
+
+        function redraw() {
+            context.clearRect(0, 0, canvas.width, canvas.height);
+            context.drawImage(image, 0, 0, canvas.width, canvas.height);
+            shapes.forEach(shape => {
+                drawRectangle(shape.x1, shape.y1, shape.x2, shape.y2, false);
+            });
+        }
+
+        canvas.addEventListener('mousedown', (e) => {
+            isDrawing = true;
+            startX = e.offsetX;
+            startY = e.offsetY;
+        });
+
+        canvas.addEventListener('mousemove', (e) => {
+            if (isDrawing) {
+                redraw();
+                drawRectangle(startX, startY, e.offsetX, e.offsetY, true);
+            }
+        });
+
+        canvas.addEventListener('mouseup', (e) => {
+            if (isDrawing) {
+                isDrawing = false;
+                shapes.push({x1: startX, y1: startY, x2: e.offsetX, y2: e.offsetY});
+                saveState();
+                redraw();
+            }
+        });
+
+        canvas.addEventListener('mouseout', () => {
+            if (isDrawing) {
+                isDrawing = false;
+            }
+        });
+
+        function drawRectangle(x1, y1, x2, y2, drawLive) {
+            context.strokeStyle = 'red';
+            context.lineWidth = 5;  // Установите толщину линии здесь
+            context.beginPath();
+            context.rect(Math.min(x1, x2), Math.min(y1, y2), Math.abs(x2 - x1), Math.abs(y2 - y1));
+            context.stroke();
+            context.fillStyle = 'black';
+            context.font = '12px Arial';
+            context.fillText(`(${x1}, ${y1})`, Math.min(x1, x2), Math.min(y1, y2) - 5);
+            context.fillText(`(${x2}, ${y2})`, Math.max(x1, x2), Math.max(y1, y2) + 15);
+            if (drawLive) {
+                context.closePath();
+            }
+        }
+
+        document.getElementById('undoBtn').addEventListener('click', () => {
+            undo();
+        });
+
+        document.getElementById('saveBtn').addEventListener('click', () => {
+            const dataURL = canvas.toDataURL('image/png');
+            const link = document.createElement('a');
+            link.href = dataURL;
+            link.download = 'annotated_image.png';
+            link.click();
+        });
+    </script>
+</body>
+</html>
+
+

@@ -11,60 +11,203 @@
     <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.5.2/css/sharp-regular.css">
     <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.5.2/css/sharp-light.css">
     <style>
-        canvas {
-            border: 1px solid black;
-        }
-        body{
+        body {
             display: flex;
             align-items: center;
             justify-content: center;
-            flex-direction: column;
             background: #2f2f2f;
             height: 100vh;
             width: 100%;
-
         }
-        h1 {
+        .container {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        .header {
+            text-align: center;
             color: white;
         }
-        canvas {
-            border: 10px solid white;
-        }
-        .buttons {
-            margin-top: 50px;
+        .main {
             display: flex;
-            width: 600px;
-            justify-content: end;
-            align-items: center;
-            gap: 50px;
+            gap: 20px;
         }
-        #saveBtn {
-            height: 50px;
-            width: 200px;
-            border: none;
-            background-color: #fafafa;
-            color: #2f2f2f;
-            font-size: 20px;
+        .shapeButtons {
+            display: flex;
+            gap: 10px;
+        }
+        .arrowButtons {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+        }
+        .left-panel {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            gap: 20px;
+        }
+        .tools, .defect-selector {
+            background: #3a3a3a;
+            padding: 20px;
+            border-radius: 10px;
+        }
+        .tools {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .tools button, .tools select {
             cursor: pointer;
+            border: none;
+            padding: 10px;
         }
-        #undoBtn {
+        .canvas-container {
+            background: white;
+            padding: 10px;
+            border-radius: 5px;
+        }
+        #coordinates {
+            color: white;
+            background: #3a3a3a;
+            padding: 10px;
+            border-radius: 5px;
+            overflow-y: auto;
+            max-height: 200px;
+        }
+
+        #copyBtn {
+            width: 230px;
+            height: 50px;
+            border-radius: 10px;
+            cursor: pointer;
+            margin-left: 20px;
+        }
+
+        .shapeBtn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 50px;
+            height: 50px;
+            cursor: pointer;
+            border: none;
+            border-radius: 10px;
+        }
+        .shapeBtn:focus {
+            border: 1px solid red;
+        }
+        #undoBtn, #redoBtn {
             height: 50px;
             width: 50px;
-            transform: rotate(180deg);
+            border-radius: 10px;
             color: #2f2f2f;
-            border-radius: 100%;
-            border: none;
             font-size: 30px;
             cursor: pointer;
+        }
+        #saveBtn {
+            width: 230px;
+            height: 50px;
+            border-radius: 10px;
+            background-color: #fafafa;
+            color: #2f2f2f;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        .color-box {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            margin-right: 10px;
+        }
+        select {
+            height: 50px;
+            width: 230px;
+            border-radius: 10px;
+            overflow-y: auto;
+}
+        option {
+            color: black;
+            text-align: center;
         }
     </style>
 </head>
 <body>
-    <h1>Отметьте дефекты на изображении</h1>
-    <canvas id="drawingCanvas" width="600" height="400"></canvas>
-    <div class="buttons">
-        <button id="undoBtn"><i class="fa-solid fa-arrow-right"></i></button>
-        <button id="saveBtn">Сохранить</button>
+    <div class="container">
+        <h1 class="header">Отметьте дефекты на изображении</h1>
+        <div class="main">
+            <div class="left-panel">
+                <div class="tools">
+                    <div class="shapeButtons">
+                        <button class="shapeBtn" id="rectBtn"><i class="fa-solid fa-square"></i></button>
+                        <button class="shapeBtn" id="circleBtn"><i class="fa-solid fa-circle"></i></button>
+                        <button class="shapeBtn" id="lineBtn"><i class="fa-solid fa-minus"></i></button>
+                        <button class="shapeBtn" id="freeDrawBtn"><i class="fa-solid fa-pen"></i></button>
+                    </div>
+
+                </div>
+                <div class="defect-selector">
+                    <select id="defectType">
+                        <option value="#ff0000" style="background-color: #ff0000; color: white;">Ассиметрия углового шва</option>
+                        <option value="#0000ff" style="background-color: #0000ff; color: white;">Бризги металла</option>
+                        <option value="#008000" style="background-color: #008000; color: white;">Волкрамовое включение</option>
+                        <option value="#800080" style="background-color: #800080; color: white;">Включение</option>
+                        <option value="#ffa500" style="background-color: #ffa500; color: white;">Включение одиночное</option>
+                        <option value="#ff6347" style="background-color: #ff6347; color: white;">Вогнутость корня шва</option>
+                        <option value="#2e8b57" style="background-color: #2e8b57; color: white;">Выпуклость (превышение проплавления) корня шва</option>
+                        <option value="#daa520" style="background-color: #daa520; color: white;">Глубокий валик</option>
+                        <option value="#ff4500" style="background-color: #ff4500; color: white;">Кратерная трещина. Трещина в кратере</option>
+                        <option value="#d2691e" style="background-color: #d2691e; color: white;">Кратер. Усадочная раковина сварного шва</option>
+                        <option value="#ffd700" style="background-color: #ffd700; color: white;">Линия пор. Линейная пористость</option>
+                        <option value="#ff00ff" style="background-color: #ff00ff; color: white;">Максимальная ширина включения</option>
+                        <option value="#8a2be2" style="background-color: #8a2be2; color: white;">Максимальный размер включения</option>
+                        <option value="#5f9ea0" style="background-color: #5f9ea0; color: white;">Местное превышение проплава</option>
+                        <option value="#7fff00" style="background-color: #7fff00; color: white;">Неплавящийся наплыв</option>
+                        <option value="#ff1493" style="background-color: #ff1493; color: white;">Наплыв</option>
+                        <option value="#00ced1" style="background-color: #00ced1; color: white;">Неправильный профиль сварного шва</option>
+                        <option value="#9400d3" style="background-color: #9400d3; color: white;">Непровар. Неполный провар</option>
+                        <option value="#00fa9a" style="background-color: #00fa9a; color: white;">Несполошность</option>
+                        <option value="#4682b4" style="background-color: #4682b4; color: white;">Оксиальное включение</option>
+                        <option value="#ff7f50" style="background-color: #ff7f50; color: white;">Отслоение</option>
+                        <option value="#b22222" style="background-color: #b22222; color: white;">Плохое возобновление шва</option>
+                        <option value="#32cd32" style="background-color: #32cd32; color: white;">Подрез</option>
+                        <option value="#ff69b4" style="background-color: #ff69b4; color: white;">Поры</option>
+                        <option value="#00008b" style="background-color: #00008b; color: white;">Превышение выпуклости</option>
+                        <option value="#ff8c00" style="background-color: #ff8c00; color: white;">Превышение усиления сварного шва</option>
+                        <option value="#483d8b" style="background-color: #483d8b; color: white;">Прерывистая линия</option>
+                        <option value="#2f4f4f" style="background-color: #2f4f4f; color: white;">Продольная трещина сварного соединения. Продольная трещина</option>
+                        <option value="#8b4513" style="background-color: #8b4513; color: white;">Прохождение сварного шва</option>
+                        <option value="#2e8b57" style="background-color: #2e8b57; color: white;">Радиационная трещина</option>
+                        <option value="#556b2f" style="background-color: #556b2f; color: white;">Разветвленная трещина сварного соединения. Разветвленная трещина</option>
+                        <option value="#808080" style="background-color: #808080; color: white;">Скопление включений</option>
+                        <option value="#bc8f8f" style="background-color: #bc8f8f; color: white;">Свищ в сварном шве</option>
+                        <option value="#9932cc" style="background-color: #9932cc; color: white;">Трещина поперечная</option>
+                        <option value="#8b0000" style="background-color: #8b0000; color: white;">Трещина сварного соединения. Трещина</option>
+                        <option value="#556b2f" style="background-color: #556b2f; color: white;">Углубление (западание) между валиками шва</option>
+                        <option value="#8b008b" style="background-color: #8b008b; color: white;">Усадочные раковины</option>
+                        <option value="#9932cc" style="background-color: #9932cc; color: white;">Флюсовое включение</option>
+                        <option value="#2e8b57" style="background-color: #2e8b57; color: white;">Шлаковое включение сварного шва. Шлаковое включение</option>
+                        <option value="#ff00ff" style="background-color: #ff00ff; color: white;">Шлаковое включение</option>
+                        <option value="#4682b4" style="background-color: #4682b4; color: white;">Неровная поверхность шва</option>
+                        <option value="#00ced1" style="background-color: #00ced1; color: white;">Неровная ширина шва</option>
+                    </select>
+                </div>
+
+                <div class="defect-selector">
+                    <button id="saveBtn">Сохранить</button>
+                </div>
+                <div class="arrowButtons">
+                    <button id="undoBtn"><i class="fa-solid fa-arrow-left"></i></button>
+                    <button id="redoBtn"><i class="fa-solid fa-arrow-right"></i></button>
+                </div>
+            </div>
+            <div class="canvas-container">
+                <canvas id="drawingCanvas" width="600" height="400"></canvas>
+            </div>
+        </div>
+        <div id="coordinates"></div>
+        <button id="copyBtn">Скопировать все дефекты</button>
+
     </div>
 
     <script>
@@ -74,18 +217,17 @@
         const shapes = [];
         let isDrawing = false;
         let startX, startY;
+        let drawingMode = 'rectangle';
+        let currentColor = '#ff0000';
 
-        // Загрузка изображения
-        const urlParams = new URLSearchParams(window.location.search);
-        const imageUrl = urlParams.get('image');
-        let image = new Image();
-        if (imageUrl) {
-            image.src = imageUrl;
-            image.onload = () => {
-                context.drawImage(image, 0, 0, canvas.width, canvas.height);
-                saveState();
-            };
-        }
+        document.getElementById('defectType').addEventListener('change', (e) => {
+            currentColor = e.target.value;
+        });
+
+        document.getElementById('rectBtn').addEventListener('click', () => drawingMode = 'rectangle');
+        document.getElementById('circleBtn').addEventListener('click', () => drawingMode = 'circle');
+        document.getElementById('lineBtn').addEventListener('click', () => drawingMode = 'line');
+        document.getElementById('freeDrawBtn').addEventListener('click', () => drawingMode = 'freeDraw');
 
         function saveState() {
             undoStack.push({
@@ -100,36 +242,104 @@
                 shapes.length = 0;
                 shapes.push(...lastState.shapes);
                 context.putImageData(lastState.image, 0, 0);
+                updateCoordinates();
             }
+        }
+
+        function redo() {
+            // Implement redo functionality if needed
         }
 
         function redraw() {
             context.clearRect(0, 0, canvas.width, canvas.height);
             context.drawImage(image, 0, 0, canvas.width, canvas.height);
             shapes.forEach(shape => {
-                drawRectangle(shape.x1, shape.y1, shape.x2, shape.y2, false);
+                if (shape.type === 'rectangle') {
+                    drawRectangle(shape.x1, shape.y1, shape.x2, shape.y2, shape.color, false);
+                } else if (shape.type === 'circle') {
+                    drawCircle(shape.x1, shape.y1, shape.x2, shape.y2, shape.color, false);
+                } else if (shape.type === 'line') {
+                    drawLine(shape.x1, shape.y1, shape.x2, shape.y2, shape.color, false);
+                } else if (shape.type === 'freeDraw') {
+                    drawFreeLine(shape.points, shape.color, false);
+                }
             });
         }
+
+        function updateCoordinates() {
+    const coordinatesDiv = document.getElementById('coordinates');
+    coordinatesDiv.innerHTML = '';
+    const defectCount = {};
+
+    shapes.forEach((shape, index) => {
+        const div = document.createElement('div');
+        const colorBox = document.createElement('span');
+        colorBox.className = 'color-box';
+        colorBox.style.backgroundColor = shape.color;
+        div.appendChild(colorBox);
+
+        const defectName = getDefectNameByColor(shape.color);
+        if (!defectCount[defectName]) {
+            defectCount[defectName] = 0;
+        }
+        defectCount[defectName]++;
+
+        let shapeText = `${defectName} ${defectCount[defectName]}: `;
+        if (shape.type === 'rectangle') {
+            shapeText += `(${shape.x1}, ${shape.y1}) - (${shape.x2}, ${shape.y2})`;
+        } else if (shape.type === 'circle') {
+            shapeText += `(${shape.x1}, ${shape.y1}) - (${shape.x2}, ${shape.y2})`;
+        } else if (shape.type === 'line') {
+            shapeText += `(${shape.x1}, ${shape.y1}) - (${shape.x2}, ${shape.y2})`;
+        }
+        div.appendChild(document.createTextNode(shapeText));
+        coordinatesDiv.appendChild(div);
+    });
+}
+
 
         canvas.addEventListener('mousedown', (e) => {
             isDrawing = true;
             startX = e.offsetX;
             startY = e.offsetY;
+            if (drawingMode === 'freeDraw') {
+                shapes.push({type: 'freeDraw', points: [{x: startX, y: startY}], color: currentColor});
+            }
         });
 
         canvas.addEventListener('mousemove', (e) => {
             if (isDrawing) {
-                redraw();
-                drawRectangle(startX, startY, e.offsetX, e.offsetY, true);
+                if (drawingMode === 'freeDraw') {
+                    const currentShape = shapes[shapes.length - 1];
+                    currentShape.points.push({x: e.offsetX, y: e.offsetY});
+                    drawFreeLine(currentShape.points, currentShape.color, true);
+                } else {
+                    redraw();
+                    if (drawingMode === 'rectangle') {
+                        drawRectangle(startX, startY, e.offsetX, e.offsetY, currentColor, true);
+                    } else if (drawingMode === 'circle') {
+                        drawCircle(startX, startY, e.offsetX, e.offsetY, currentColor, true);
+                    } else if (drawingMode === 'line') {
+                        drawLine(startX, startY, e.offsetX, e.offsetY, currentColor, true);
+                    }
+                }
             }
         });
 
         canvas.addEventListener('mouseup', (e) => {
             if (isDrawing) {
                 isDrawing = false;
-                shapes.push({x1: startX, y1: startY, x2: e.offsetX, y2: e.offsetY});
-                saveState();
-                redraw();
+                if (drawingMode === 'freeDraw') {
+                    saveState();
+                    updateCoordinates();
+                } else {
+                    const shape = {x1: startX, y1: startY, x2: e.offsetX, y2: e.offsetY, color: currentColor};
+                    shape.type = drawingMode;
+                    shapes.push(shape);
+                    saveState();
+                    redraw();
+                    updateCoordinates();
+                }
             }
         });
 
@@ -139,23 +349,72 @@
             }
         });
 
-        function drawRectangle(x1, y1, x2, y2, drawLive) {
-            context.strokeStyle = 'red';
-            context.lineWidth = 5;  // Установите толщину линии здесь
+        function drawRectangle(x1, y1, x2, y2, color, drawLive) {
+            context.strokeStyle = color;
+            context.lineWidth = 3;
             context.beginPath();
             context.rect(Math.min(x1, x2), Math.min(y1, y2), Math.abs(x2 - x1), Math.abs(y2 - y1));
             context.stroke();
-            context.fillStyle = 'black';
-            context.font = '12px Arial';
-            context.fillText(`(${x1}, ${y1})`, Math.min(x1, x2), Math.min(y1, y2) - 5);
-            context.fillText(`(${x2}, ${y2})`, Math.max(x1, x2), Math.max(y1, y2) + 15);
             if (drawLive) {
                 context.closePath();
             }
         }
 
+        function drawCircle(x1, y1, x2, y2, color, drawLive) {
+            context.strokeStyle = color;
+            context.lineWidth = 3;
+            context.beginPath();
+            const radius = Math.sqrt(Math.pow(x2 - x1, 2) + Math.pow(y2 - y1, 2));
+            context.arc(x1, y1, radius, 0, 2 * Math.PI);
+            context.stroke();
+            if (drawLive) {
+                context.closePath();
+            }
+        }
+
+        function drawLine(x1, y1, x2, y2, color, drawLive) {
+            context.strokeStyle = color;
+            context.lineWidth = 3;
+            context.beginPath();
+            context.moveTo(x1, y1);
+            context.lineTo(x2, y2);
+            context.stroke();
+            if (drawLive) {
+                context.closePath();
+            }
+        }
+
+        function drawFreeLine(points, color, drawLive) {
+            context.strokeStyle = color;
+            context.lineWidth = 3;
+            context.beginPath();
+            context.moveTo(points[0].x, points[0].y);
+            for (let i = 1; i < points.length; i++) {
+                context.lineTo(points[i].x, points[i].y);
+            }
+            context.stroke();
+            if (drawLive) {
+                context.closePath();
+            }
+        }
+
+        function getDefectNameByColor(color) {
+            const defectSelect = document.getElementById('defectType');
+            const options = defectSelect.options;
+            for (let i = 0; i < options.length; i++) {
+                if (options[i].value === color) {
+                    return options[i].text;
+                }
+            }
+            return 'Unknown Defect';
+        }
+
         document.getElementById('undoBtn').addEventListener('click', () => {
             undo();
+        });
+
+        document.getElementById('redoBtn').addEventListener('click', () => {
+            redo();
         });
 
         document.getElementById('saveBtn').addEventListener('click', () => {
@@ -165,8 +424,28 @@
             link.download = 'annotated_image.png';
             link.click();
         });
+
+        document.getElementById('copyBtn').addEventListener('click', () => {
+        const coordinatesDiv = document.getElementById('coordinates');
+        const text = coordinatesDiv.innerText;
+        navigator.clipboard.writeText(text).then(() => {
+            console.log('Координаты дефектов скопированы в буфер обмена!');
+        }).catch(err => {
+            console.error('Ошибка при копировании координат: ', err);
+        });
+    });
+
+        // Load the image
+        const urlParams = new URLSearchParams(window.location.search);
+        const imageUrl = urlParams.get('image');
+        let image = new Image();
+        if (imageUrl) {
+            image.src = imageUrl;
+            image.onload = () => {
+                context.drawImage(image, 0, 0, canvas.width, canvas.height);
+                saveState();
+            };
+        }
     </script>
 </body>
 </html>
-
-

@@ -21,7 +21,7 @@ bot = telebot.TeleBot(API_TOKEN)
 IMAGE_FOLDER = 'images'
 ANNOTATED_IMAGE_FOLDER = 'annotated_images'
 CSV_FILE_PATH = 'weld_defects.csv'
-WEB_APP_URL = 'http://localhost:8000/draw.html?image=images/'  # Убедитесь, что путь соответствует вашему серверу
+WEB_APP_URL = 'http://65.108.250.169/draw.html?image=images/'  # Убедитесь, что путь соответствует вашему серверу
 
 # Google Drive API настройки
 SERVICE_ACCOUNT_FILE = 'tgbot2-426018-f1f15b697496.json'

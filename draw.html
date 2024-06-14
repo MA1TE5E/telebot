@@ -24,6 +24,14 @@
             flex-direction: column;
             gap: 20px;
         }
+        .defect-checkboxes {
+            display: flex;
+            flex-direction: column;
+        }
+        .mainDefectsCheckboxes {
+            display: flex;
+            flex-direction: column;
+        }
         .header {
             text-align: center;
             color: white;
@@ -35,6 +43,8 @@
         .shapeButtons {
             display: flex;
             gap: 10px;
+            align-items: center;
+            justify-content: center;
         }
         .arrowButtons {
             display: flex;
@@ -44,9 +54,31 @@
         .left-panel {
             display: flex;
             flex-direction: column;
-            justify-content: space-between;
+            justify-content: start;
             gap: 20px;
+            width: 300px;
+            transition: 2s;
         }
+        .defect-radio {
+            color: #fafafa;
+        }
+        .defect-radio input[type="radio"] {
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+            width: 20px;
+            height: 20px;
+            margin-right: 10px;
+            background-color: #ffffff;
+            border: 2px solid #000000;
+            cursor: pointer;
+        }
+
+        .defect-radio input[type="radio"]:checked {
+            background-color: currentColor;
+            border-color: currentColor;
+        }
+
         .tools, .defect-selector {
             background: #3a3a3a;
             padding: 20px;
@@ -73,7 +105,7 @@
             padding: 10px;
             border-radius: 5px;
             overflow-y: auto;
-            max-height: 200px;
+            width: 300px;
         }
 
         #copyBtn {
@@ -125,10 +157,37 @@
             width: 230px;
             border-radius: 10px;
             overflow-y: auto;
-}
+        }
         option {
             color: black;
             text-align: center;
+        }
+        .defect-checkbox {
+            display: flex;
+            align-items: center;
+            margin-bottom: 5px;
+        }
+        .canvas-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .color-box {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            margin-right: 10px;
+            margin-bottom: 5px;
+            border: 1px solid #000;
+        }
+        .section-title {
+            color: white;
+            font-size: 20px;
+            margin-bottom: 10px;
+        }
+
+        i {
+            font-size: 20px;
         }
     </style>
 </head>
@@ -138,40 +197,72 @@
         <div class="main">
             <div class="left-panel">
                 <div class="tools">
+                    <div class="section-title">Инструменты для выделения</div>
                     <div class="shapeButtons">
-                        <button class="shapeBtn" id="rectBtn"><i class="fa-solid fa-square"></i></button>
-                        <button class="shapeBtn" id="circleBtn"><i class="fa-solid fa-circle"></i></button>
-                        <button class="shapeBtn" id="lineBtn"><i class="fa-solid fa-minus"></i></button>
-                        <button class="shapeBtn" id="freeDrawBtn"><i class="fa-solid fa-pen"></i></button>
+                        <button class="shapeBtn" id="rectBtn"><i class="fa-light fa-square"></i></button>
+                        <button class="shapeBtn" id="circleBtn"><i class="fa-regular fa-circle"></i></i></button>
+                        <button class="shapeBtn" id="lineBtn"><i class="fa-solid fa-dash"></i></button>
+                        <button class="shapeBtn" id="freeDrawBtn"><i class="fa-solid fa-pen-line"></i></button>
                     </div>
-
                 </div>
-                <div class="defect-selector">
-                    <select id="defectType">
-                        <option value="#ff0000" style="background-color: #ff0000; color: white;">Ассиметрия углового шва</option>
-                        <option value="#0000ff" style="background-color: #0000ff; color: white;">Бризги металла</option>
-                        <option value="#008000" style="background-color: #008000; color: white;">Волкрамовое включение</option>
+                <div class="tools">
+                    <div class="section-title">Типы дефектов</div>
+                    <div class="defect-radio">
+                        <input type="radio" id="mainDefects" name="defectCategory" value="main" checked>
+                        <label for="mainDefects">Основные типы дефектов</label>
+                        <br>
+                        <input type="radio" id="additionalDefects" name="defectCategory" value="additional">
+                        <label for="additionalDefects">Дополнительные дефекты</label>
+                    </div>
+                    <div class="defect-checkboxes" id="mainDefectsCheckboxes">
+                        <label class="defect-radio">
+                            <input type="radio" name="defect" value="#ff0000" style="color: #ff0000;"> Брызги
+                        </label>
+                        <label class="defect-radio">
+                            <input type="radio" name="defect" value="#ff7300" style="color: #ff7300;"> Подрез
+                        </label>
+                        <label class="defect-radio">
+                            <input type="radio" name="defect" value="#fff000" style="color: #fff000;"> Наплыв
+                        </label>
+                        <label class="defect-radio">
+                            <input type="radio" name="defect" value="#00ff00" style="color: #00ff00;"> Кратер
+                        </label>
+                        <label class="defect-radio">
+                            <input type="radio" name="defect" value="#00ffff" style="color: #00ffff;"> Трещина
+                        </label>
+                        <label class="defect-radio">
+                            <input type="radio" name="defect" value="#0000ff" style="color: #0000ff;"> Непровар
+                        </label>
+                        <label class="defect-radio">
+                            <input type="radio" name="defect" value="#bf00ff" style="color: #bf00ff;"> Поры
+                        </label>
+                        <label class="defect-radio">
+                            <input type="radio" name="defect" value="#00ff80" style="color: #00ff80;"> Шлаковые включения
+                        </label>
+                        <label class="defect-radio">
+                            <input type="radio" name="defect" value="#0077ff" style="color: #0077ff;"> Прожог
+                        </label>
+                    </div>
+                    <div class="defect-selector" id="additionalDefectsSelect" style="display:none;">
+                        <select id="defectType">
+                            <option value="#ff0000" style="background-color: #ff0000; color: white;">Асимметрия углового шва</option>
+                        <option value="#008000" style="background-color: #008000; color: white;">Вольфрамовое включение</option>
                         <option value="#800080" style="background-color: #800080; color: white;">Включение</option>
                         <option value="#ffa500" style="background-color: #ffa500; color: white;">Включение одиночное</option>
                         <option value="#ff6347" style="background-color: #ff6347; color: white;">Вогнутость корня шва</option>
                         <option value="#2e8b57" style="background-color: #2e8b57; color: white;">Выпуклость (превышение проплавления) корня шва</option>
                         <option value="#daa520" style="background-color: #daa520; color: white;">Глубокий валик</option>
                         <option value="#ff4500" style="background-color: #ff4500; color: white;">Кратерная трещина. Трещина в кратере</option>
-                        <option value="#d2691e" style="background-color: #d2691e; color: white;">Кратер. Усадочная раковина сварного шва</option>
                         <option value="#ffd700" style="background-color: #ffd700; color: white;">Линия пор. Линейная пористость</option>
                         <option value="#ff00ff" style="background-color: #ff00ff; color: white;">Максимальная ширина включения</option>
                         <option value="#8a2be2" style="background-color: #8a2be2; color: white;">Максимальный размер включения</option>
                         <option value="#5f9ea0" style="background-color: #5f9ea0; color: white;">Местное превышение проплава</option>
                         <option value="#7fff00" style="background-color: #7fff00; color: white;">Неплавящийся наплыв</option>
-                        <option value="#ff1493" style="background-color: #ff1493; color: white;">Наплыв</option>
                         <option value="#00ced1" style="background-color: #00ced1; color: white;">Неправильный профиль сварного шва</option>
-                        <option value="#9400d3" style="background-color: #9400d3; color: white;">Непровар. Неполный провар</option>
                         <option value="#00fa9a" style="background-color: #00fa9a; color: white;">Несполошность</option>
                         <option value="#4682b4" style="background-color: #4682b4; color: white;">Оксиальное включение</option>
                         <option value="#ff7f50" style="background-color: #ff7f50; color: white;">Отслоение</option>
                         <option value="#b22222" style="background-color: #b22222; color: white;">Плохое возобновление шва</option>
-                        <option value="#32cd32" style="background-color: #32cd32; color: white;">Подрез</option>
-                        <option value="#ff69b4" style="background-color: #ff69b4; color: white;">Поры</option>
                         <option value="#00008b" style="background-color: #00008b; color: white;">Превышение выпуклости</option>
                         <option value="#ff8c00" style="background-color: #ff8c00; color: white;">Превышение усиления сварного шва</option>
                         <option value="#483d8b" style="background-color: #483d8b; color: white;">Прерывистая линия</option>
@@ -182,32 +273,31 @@
                         <option value="#808080" style="background-color: #808080; color: white;">Скопление включений</option>
                         <option value="#bc8f8f" style="background-color: #bc8f8f; color: white;">Свищ в сварном шве</option>
                         <option value="#9932cc" style="background-color: #9932cc; color: white;">Трещина поперечная</option>
-                        <option value="#8b0000" style="background-color: #8b0000; color: white;">Трещина сварного соединения. Трещина</option>
                         <option value="#556b2f" style="background-color: #556b2f; color: white;">Углубление (западание) между валиками шва</option>
                         <option value="#8b008b" style="background-color: #8b008b; color: white;">Усадочные раковины</option>
                         <option value="#9932cc" style="background-color: #9932cc; color: white;">Флюсовое включение</option>
-                        <option value="#2e8b57" style="background-color: #2e8b57; color: white;">Шлаковое включение сварного шва. Шлаковое включение</option>
-                        <option value="#ff00ff" style="background-color: #ff00ff; color: white;">Шлаковое включение</option>
                         <option value="#4682b4" style="background-color: #4682b4; color: white;">Неровная поверхность шва</option>
                         <option value="#00ced1" style="background-color: #00ced1; color: white;">Неровная ширина шва</option>
-                    </select>
-                </div>
-
-                <div class="defect-selector">
-                    <button id="saveBtn">Сохранить</button>
-                </div>
-                <div class="arrowButtons">
-                    <button id="undoBtn"><i class="fa-solid fa-arrow-left"></i></button>
-                    <button id="redoBtn"><i class="fa-solid fa-arrow-right"></i></button>
+                        </select>
+                    </div>
                 </div>
             </div>
             <div class="canvas-container">
                 <canvas id="drawingCanvas" width="600" height="400"></canvas>
             </div>
+            <div>
+                <div class="section-title">Выделенные дефекты</div>
+                <div id="coordinates"></div>
+            </div>
         </div>
-        <div id="coordinates"></div>
-        <button id="copyBtn">Скопировать все дефекты</button>
-
+        <div class="arrowButtons">
+            <button id="undoBtn"><i class="fa-solid fa-arrow-left"></i></button>
+            <button id="redoBtn"><i class="fa-solid fa-arrow-right"></i></button>
+        </div>
+        <div class="shapeButtons">
+            <button id="saveBtn">Сохранить изображение</button>
+            <button id="copyBtn">Скопировать результаты <br>в буфер обмена</button>
+        </div>
     </div>
 
     <script>
@@ -220,8 +310,43 @@
         let drawingMode = 'rectangle';
         let currentColor = '#ff0000';
 
+        document.getElementById('mainDefects').addEventListener('change', (e) => {
+            if (e.target.checked) {
+                document.getElementById('defectType').disabled = true;
+                document.getElementById('mainDefectsCheckboxes').style.display = 'flex';
+                document.getElementById('additionalDefectsSelect').style.display = 'none';
+                const defectRadios = document.querySelectorAll('input[name="defect"]');
+                defectRadios.forEach(radio => {
+                    radio.disabled = false;
+                });
+            }
+        });
+
+        document.getElementById('additionalDefects').addEventListener('change', (e) => {
+            if (e.target.checked) {
+                document.getElementById('defectType').disabled = false;
+                document.getElementById('mainDefectsCheckboxes').style.display = 'none';
+                document.getElementById('additionalDefectsSelect').style.display = 'block';
+                const defectRadios = document.querySelectorAll('input[name="defect"]');
+                defectRadios.forEach(radio => {
+                    radio.disabled = true;
+                });
+                currentColor = document.getElementById('defectType').value;
+            }
+        });
+
+        document.querySelectorAll('input[name="defect"]').forEach(radio => {
+            radio.addEventListener('change', (e) => {
+                if (e.target.checked) {
+                    currentColor = e.target.value;
+                }
+            });
+        });
+
         document.getElementById('defectType').addEventListener('change', (e) => {
-            currentColor = e.target.value;
+            if (document.getElementById('additionalDefects').checked) {
+                currentColor = e.target.value;
+            }
         });
 
         document.getElementById('rectBtn').addEventListener('click', () => drawingMode = 'rectangle');
@@ -267,36 +392,59 @@
         }
 
         function updateCoordinates() {
-    const coordinatesDiv = document.getElementById('coordinates');
-    coordinatesDiv.innerHTML = '';
-    const defectCount = {};
+            const coordinatesDiv = document.getElementById('coordinates');
+            coordinatesDiv.innerHTML = '';
+            const defectGroups = {};
 
-    shapes.forEach((shape, index) => {
-        const div = document.createElement('div');
-        const colorBox = document.createElement('span');
-        colorBox.className = 'color-box';
-        colorBox.style.backgroundColor = shape.color;
-        div.appendChild(colorBox);
+            shapes.forEach((shape, index) => {
+                const defectName = getDefectNameByColor(shape.color);
+                if (!defectGroups[defectName]) {
+                    defectGroups[defectName] = [];
+                }
+                let shapeText = `${defectName} ${defectGroups[defectName].length + 1}: `;
+                if (shape.type === 'rectangle') {
+                    shapeText += `(${shape.x1}, ${shape.y1}) - (${shape.x2}, ${shape.y2})`;
+                } else if (shape.type === 'circle') {
+                    shapeText += `(${shape.x1}, ${shape.y1}) - (${shape.x2}, ${shape.y2})`;
+                } else if (shape.type === 'line') {
+                    shapeText += `(${shape.x1}, ${shape.y1}) - (${shape.x2}, ${shape.y2})`;
+                }
+                defectGroups[defectName].push({ text: shapeText, color: shape.color });
+            });
 
-        const defectName = getDefectNameByColor(shape.color);
-        if (!defectCount[defectName]) {
-            defectCount[defectName] = 0;
+            for (const defectName in defectGroups) {
+                defectGroups[defectName].forEach(defect => {
+                    const shapeDiv = document.createElement('div');
+                    shapeDiv.style.marginBottom = '10px';
+                    shapeDiv.style.display = 'flex';
+                    shapeDiv.style.alignItems = 'center';
+
+                    const shapeColorBox = document.createElement('span');
+                    shapeColorBox.className = 'color-box';
+                    shapeColorBox.style.backgroundColor = defect.color;
+                    shapeDiv.appendChild(shapeColorBox);
+                    shapeDiv.appendChild(document.createTextNode(defect.text));
+                    coordinatesDiv.appendChild(shapeDiv);
+                });
+            }
         }
-        defectCount[defectName]++;
 
-        let shapeText = `${defectName} ${defectCount[defectName]}: `;
-        if (shape.type === 'rectangle') {
-            shapeText += `(${shape.x1}, ${shape.y1}) - (${shape.x2}, ${shape.y2})`;
-        } else if (shape.type === 'circle') {
-            shapeText += `(${shape.x1}, ${shape.y1}) - (${shape.x2}, ${shape.y2})`;
-        } else if (shape.type === 'line') {
-            shapeText += `(${shape.x1}, ${shape.y1}) - (${shape.x2}, ${shape.y2})`;
+        function getDefectNameByColor(color) {
+            const defectCheckboxes = document.querySelectorAll('input[name="defect"]');
+            for (let i = 0; i < defectCheckboxes.length; i++) {
+                if (defectCheckboxes[i].value === color) {
+                    return defectCheckboxes[i].nextSibling.nodeValue.trim();
+                }
+            }
+            const defectSelect = document.getElementById('defectType');
+            const options = defectSelect.options;
+            for (let i = 0; i < options.length; i++) {
+                if (options[i].value === color) {
+                    return options[i].text;
+                }
+            }
+            return 'Unknown Defect';
         }
-        div.appendChild(document.createTextNode(shapeText));
-        coordinatesDiv.appendChild(div);
-    });
-}
-
 
         canvas.addEventListener('mousedown', (e) => {
             isDrawing = true;
@@ -398,17 +546,6 @@
             }
         }
 
-        function getDefectNameByColor(color) {
-            const defectSelect = document.getElementById('defectType');
-            const options = defectSelect.options;
-            for (let i = 0; i < options.length; i++) {
-                if (options[i].value === color) {
-                    return options[i].text;
-                }
-            }
-            return 'Unknown Defect';
-        }
-
         document.getElementById('undoBtn').addEventListener('click', () => {
             undo();
         });
@@ -426,14 +563,14 @@
         });
 
         document.getElementById('copyBtn').addEventListener('click', () => {
-        const coordinatesDiv = document.getElementById('coordinates');
-        const text = coordinatesDiv.innerText;
-        navigator.clipboard.writeText(text).then(() => {
-            console.log('Координаты дефектов скопированы в буфер обмена!');
-        }).catch(err => {
-            console.error('Ошибка при копировании координат: ', err);
+            const coordinatesDiv = document.getElementById('coordinates');
+            const text = coordinatesDiv.innerText;
+            navigator.clipboard.writeText(text).then(() => {
+                console.log('Координаты дефектов скопированы в буфер обмена!');
+            }).catch(err => {
+                console.error('Ошибка при копировании координат: ', err);
+            });
         });
-    });
 
         // Load the image
         const urlParams = new URLSearchParams(window.location.search);

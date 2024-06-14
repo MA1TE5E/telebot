@@ -13,7 +13,7 @@ logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(name)s - %(level
 logger = logging.getLogger(__name__)
 
 # Вставьте сюда токен своего бота
-API_TOKEN = '7322233778:AAHxgxNC_6dRnsJJeXhlyyw4ajBPu4ELUEk'
+API_TOKEN = '6885524246:AAHnUb7W71CbTofNMw4YrnyLb-bnloBoc4I'
 bot = telebot.TeleBot(API_TOKEN)
 
 # Папки для сохранения изображений

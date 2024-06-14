@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.5.2/css/sharp-solid.css">
     <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.5.2/css/sharp-regular.css">
     <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.5.2/css/sharp-light.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.10/clipboard.min.js"></script>
     <style>
         body {
             display: flex;
@@ -245,39 +246,39 @@
                     </div>
                     <div class="defect-selector" id="additionalDefectsSelect" style="display:none;">
                         <select id="defectType">
-                            <option value="#ff0000" style="background-color: #ff0000; color: white;">Асимметрия углового шва</option>
-                        <option value="#008000" style="background-color: #008000; color: white;">Вольфрамовое включение</option>
-                        <option value="#800080" style="background-color: #800080; color: white;">Включение</option>
-                        <option value="#ffa500" style="background-color: #ffa500; color: white;">Включение одиночное</option>
-                        <option value="#ff6347" style="background-color: #ff6347; color: white;">Вогнутость корня шва</option>
-                        <option value="#2e8b57" style="background-color: #2e8b57; color: white;">Выпуклость (превышение проплавления) корня шва</option>
-                        <option value="#daa520" style="background-color: #daa520; color: white;">Глубокий валик</option>
-                        <option value="#ff4500" style="background-color: #ff4500; color: white;">Кратерная трещина. Трещина в кратере</option>
-                        <option value="#ffd700" style="background-color: #ffd700; color: white;">Линия пор. Линейная пористость</option>
-                        <option value="#ff00ff" style="background-color: #ff00ff; color: white;">Максимальная ширина включения</option>
-                        <option value="#8a2be2" style="background-color: #8a2be2; color: white;">Максимальный размер включения</option>
-                        <option value="#5f9ea0" style="background-color: #5f9ea0; color: white;">Местное превышение проплава</option>
-                        <option value="#7fff00" style="background-color: #7fff00; color: white;">Неплавящийся наплыв</option>
-                        <option value="#00ced1" style="background-color: #00ced1; color: white;">Неправильный профиль сварного шва</option>
-                        <option value="#00fa9a" style="background-color: #00fa9a; color: white;">Несполошность</option>
-                        <option value="#4682b4" style="background-color: #4682b4; color: white;">Оксиальное включение</option>
-                        <option value="#ff7f50" style="background-color: #ff7f50; color: white;">Отслоение</option>
-                        <option value="#b22222" style="background-color: #b22222; color: white;">Плохое возобновление шва</option>
-                        <option value="#00008b" style="background-color: #00008b; color: white;">Превышение выпуклости</option>
-                        <option value="#ff8c00" style="background-color: #ff8c00; color: white;">Превышение усиления сварного шва</option>
-                        <option value="#483d8b" style="background-color: #483d8b; color: white;">Прерывистая линия</option>
-                        <option value="#2f4f4f" style="background-color: #2f4f4f; color: white;">Продольная трещина сварного соединения. Продольная трещина</option>
-                        <option value="#8b4513" style="background-color: #8b4513; color: white;">Прохождение сварного шва</option>
-                        <option value="#2e8b57" style="background-color: #2e8b57; color: white;">Радиационная трещина</option>
-                        <option value="#556b2f" style="background-color: #556b2f; color: white;">Разветвленная трещина сварного соединения. Разветвленная трещина</option>
-                        <option value="#808080" style="background-color: #808080; color: white;">Скопление включений</option>
-                        <option value="#bc8f8f" style="background-color: #bc8f8f; color: white;">Свищ в сварном шве</option>
-                        <option value="#9932cc" style="background-color: #9932cc; color: white;">Трещина поперечная</option>
-                        <option value="#556b2f" style="background-color: #556b2f; color: white;">Углубление (западание) между валиками шва</option>
-                        <option value="#8b008b" style="background-color: #8b008b; color: white;">Усадочные раковины</option>
-                        <option value="#9932cc" style="background-color: #9932cc; color: white;">Флюсовое включение</option>
-                        <option value="#4682b4" style="background-color: #4682b4; color: white;">Неровная поверхность шва</option>
-                        <option value="#00ced1" style="background-color: #00ced1; color: white;">Неровная ширина шва</option>
+                            <option value="#ff0000" style="background-color: #ff0000; color: white;">1. Асимметрия углового шва</option>
+                        <option value="#008000" style="background-color: #008000; color: white;">2. Вольфрамовое включение</option>
+                        <option value="#800080" style="background-color: #800080; color: white;">3. Включение</option>
+                        <option value="#ffa500" style="background-color: #ffa500; color: white;">4. Включение одиночное</option>
+                        <option value="#ff6347" style="background-color: #ff6347; color: white;">5. Вогнутость корня шва</option>
+                        <option value="#2e8b57" style="background-color: #2e8b57; color: white;">6. Выпуклость (превышение проплавления) корня шва</option>
+                        <option value="#daa520" style="background-color: #daa520; color: white;">7. Глубокий валик</option>
+                        <option value="#ff4500" style="background-color: #ff4500; color: white;">8. Кратерная трещина. Трещина в кратере</option>
+                        <option value="#ffd700" style="background-color: #ffd700; color: white;">9. Линия пор. Линейная пористость</option>
+                        <option value="#ff00ff" style="background-color: #ff00ff; color: white;">10. Максимальная ширина включения</option>
+                        <option value="#8a2be2" style="background-color: #8a2be2; color: white;">11. Максимальный размер включения</option>
+                        <option value="#5f9ea0" style="background-color: #5f9ea0; color: white;">12. Местное превышение проплава</option>
+                        <option value="#7fff00" style="background-color: #7fff00; color: white;">13. Неплавящийся наплыв</option>
+                        <option value="#00ced1" style="background-color: #00ced1; color: white;">14. Неправильный профиль сварного шва</option>
+                        <option value="#00fa9a" style="background-color: #00fa9a; color: white;">15. Несполошность</option>
+                        <option value="#4682b4" style="background-color: #4682b4; color: white;">16. Оксиальное включение</option>
+                        <option value="#ff7f50" style="background-color: #ff7f50; color: white;">17. Отслоение</option>
+                        <option value="#b22222" style="background-color: #b22222; color: white;">18. Плохое возобновление шва</option>
+                        <option value="#00008b" style="background-color: #00008b; color: white;">19. Превышение выпуклости</option>
+                        <option value="#ff8c00" style="background-color: #ff8c00; color: white;">20. Превышение усиления сварного шва</option>
+                        <option value="#483d8b" style="background-color: #483d8b; color: white;">21. Прерывистая линия</option>
+                        <option value="#2f4f4f" style="background-color: #2f4f4f; color: white;">22. Продольная трещина сварного соединения. Продольная трещина</option>
+                        <option value="#8b4513" style="background-color: #8b4513; color: white;">23. Прохождение сварного шва</option>
+                        <option value="#2e8b57" style="background-color: #2e8b57; color: white;">24. Радиационная трещина</option>
+                        <option value="#556b2f" style="background-color: #556b2f; color: white;">25. Разветвленная трещина сварного соединения. Разветвленная трещина</option>
+                        <option value="#808080" style="background-color: #808080; color: white;">26. Скопление включений</option>
+                        <option value="#bc8f8f" style="background-color: #bc8f8f; color: white;">27. Свищ в сварном шве</option>
+                        <option value="#9932cc" style="background-color: #9932cc; color: white;">28. Трещина поперечная</option>
+                        <option value="#556b2f" style="background-color: #556b2f; color: white;">29. Углубление (западание) между валиками шва</option>
+                        <option value="#8b008b" style="background-color: #8b008b; color: white;">30. Усадочные раковины</option>
+                        <option value="#9932cc" style="background-color: #9932cc; color: white;">31. Флюсовое включение</option>
+                        <option value="#4682b4" style="background-color: #4682b4; color: white;">32. Неровная поверхность шва</option>
+                        <option value="#00ced1" style="background-color: #00ced1; color: white;">33. Неровная ширина шва</option>
                         </select>
                     </div>
                 </div>
@@ -296,293 +297,297 @@
         </div>
         <div class="shapeButtons">
             <button id="saveBtn">Сохранить изображение</button>
-            <button id="copyBtn">Скопировать результаты <br>в буфер обмена</button>
+            <button id="copyBtn" data-clipboard-target="#coordinates">Скопировать результаты <br>в буфер обмена</button>
         </div>
     </div>
 
     <script>
         const canvas = document.getElementById('drawingCanvas');
-        const context = canvas.getContext('2d');
-        const undoStack = [];
-        const shapes = [];
-        let isDrawing = false;
-        let startX, startY;
-        let drawingMode = 'rectangle';
-        let currentColor = '#ff0000';
+    const context = canvas.getContext('2d');
+    const undoStack = [];
+    const shapes = [];
+    let isDrawing = false;
+    let startX, startY;
+    let drawingMode = 'rectangle';
+    let currentColor = '#ff0000';
 
-        document.getElementById('mainDefects').addEventListener('change', (e) => {
-            if (e.target.checked) {
-                document.getElementById('defectType').disabled = true;
-                document.getElementById('mainDefectsCheckboxes').style.display = 'flex';
-                document.getElementById('additionalDefectsSelect').style.display = 'none';
-                const defectRadios = document.querySelectorAll('input[name="defect"]');
-                defectRadios.forEach(radio => {
-                    radio.disabled = false;
-                });
-            }
-        });
-
-        document.getElementById('additionalDefects').addEventListener('change', (e) => {
-            if (e.target.checked) {
-                document.getElementById('defectType').disabled = false;
-                document.getElementById('mainDefectsCheckboxes').style.display = 'none';
-                document.getElementById('additionalDefectsSelect').style.display = 'block';
-                const defectRadios = document.querySelectorAll('input[name="defect"]');
-                defectRadios.forEach(radio => {
-                    radio.disabled = true;
-                });
-                currentColor = document.getElementById('defectType').value;
-            }
-        });
-
-        document.querySelectorAll('input[name="defect"]').forEach(radio => {
-            radio.addEventListener('change', (e) => {
-                if (e.target.checked) {
-                    currentColor = e.target.value;
-                }
+    document.getElementById('mainDefects').addEventListener('change', (e) => {
+        if (e.target.checked) {
+            document.getElementById('defectType').disabled = true;
+            document.getElementById('mainDefectsCheckboxes').style.display = 'flex';
+            document.getElementById('additionalDefectsSelect').style.display = 'none';
+            const defectRadios = document.querySelectorAll('input[name="defect"]');
+            defectRadios.forEach(radio => {
+                radio.disabled = false;
             });
-        });
+        }
+    });
 
-        document.getElementById('defectType').addEventListener('change', (e) => {
-            if (document.getElementById('additionalDefects').checked) {
+    document.getElementById('additionalDefects').addEventListener('change', (e) => {
+        if (e.target.checked) {
+            document.getElementById('defectType').disabled = false;
+            document.getElementById('mainDefectsCheckboxes').style.display = 'none';
+            document.getElementById('additionalDefectsSelect').style.display = 'block';
+            const defectRadios = document.querySelectorAll('input[name="defect"]');
+            defectRadios.forEach(radio => {
+                radio.disabled = true;
+            });
+            currentColor = document.getElementById('defectType').value;
+        }
+    });
+
+    document.querySelectorAll('input[name="defect"]').forEach(radio => {
+        radio.addEventListener('change', (e) => {
+            if (e.target.checked) {
                 currentColor = e.target.value;
             }
         });
+    });
 
-        document.getElementById('rectBtn').addEventListener('click', () => drawingMode = 'rectangle');
-        document.getElementById('circleBtn').addEventListener('click', () => drawingMode = 'circle');
-        document.getElementById('lineBtn').addEventListener('click', () => drawingMode = 'line');
-        document.getElementById('freeDrawBtn').addEventListener('click', () => drawingMode = 'freeDraw');
+    document.getElementById('defectType').addEventListener('change', (e) => {
+        if (document.getElementById('additionalDefects').checked) {
+            currentColor = e.target.value;
+        }
+    });
 
-        function saveState() {
-            undoStack.push({
-                shapes: [...shapes],
-                image: context.getImageData(0, 0, canvas.width, canvas.height)
+    document.getElementById('rectBtn').addEventListener('click', () => drawingMode = 'rectangle');
+    document.getElementById('circleBtn').addEventListener('click', () => drawingMode = 'circle');
+    document.getElementById('lineBtn').addEventListener('click', () => drawingMode = 'line');
+    document.getElementById('freeDrawBtn').addEventListener('click', () => drawingMode = 'freeDraw');
+
+    function saveState() {
+        undoStack.push({
+            shapes: [...shapes],
+            image: context.getImageData(0, 0, canvas.width, canvas.height)
+        });
+    }
+
+    function undo() {
+        if (undoStack.length > 0) {
+            const lastState = undoStack.pop();
+            shapes.length = 0;
+            shapes.push(...lastState.shapes);
+            context.putImageData(lastState.image, 0, 0);
+            updateCoordinates();
+        }
+    }
+
+    function redo() {
+        // Implement redo functionality if needed
+    }
+
+    function redraw() {
+        context.clearRect(0, 0, canvas.width, canvas.height);
+        context.drawImage(image, 0, 0, canvas.width, canvas.height);
+        shapes.forEach(shape => {
+            if (shape.type === 'rectangle') {
+                drawRectangle(shape.x1, shape.y1, shape.x2, shape.y2, shape.color, false);
+            } else if (shape.type === 'circle') {
+                drawCircle(shape.x1, shape.y1, shape.x2, shape.y2, shape.color, false);
+            } else if (shape.type === 'line') {
+                drawLine(shape.x1, shape.y1, shape.x2, shape.y2, shape.color, false);
+            } else if (shape.type === 'freeDraw') {
+                drawFreeLine(shape.points, shape.color, false);
+            }
+        });
+    }
+
+    function updateCoordinates() {
+        const coordinatesDiv = document.getElementById('coordinates');
+        coordinatesDiv.innerHTML = '';
+        const defectGroups = {};
+
+        shapes.forEach((shape, index) => {
+            const defectName = getDefectNameByColor(shape.color);
+            if (!defectGroups[defectName]) {
+                defectGroups[defectName] = [];
+            }
+            let shapeText = `${defectName} ${defectGroups[defectName].length + 1}: `;
+            if (shape.type === 'rectangle') {
+                shapeText += `(${shape.x1}, ${shape.y1}) - (${shape.x2}, ${shape.y2})`;
+            } else if (shape.type === 'circle') {
+                shapeText += `(${shape.x1}, ${shape.y1}) - (${shape.x2}, ${shape.y2})`;
+            } else if (shape.type === 'line') {
+                shapeText += `(${shape.x1}, ${shape.y1}) - (${shape.x2}, ${shape.y2})`;
+            }
+            defectGroups[defectName].push({ text: shapeText, color: shape.color });
+        });
+
+        for (const defectName in defectGroups) {
+            defectGroups[defectName].forEach(defect => {
+                const shapeDiv = document.createElement('div');
+                shapeDiv.style.marginBottom = '10px';
+                shapeDiv.style.display = 'flex';
+                shapeDiv.style.alignItems = 'center';
+
+                const shapeColorBox = document.createElement('span');
+                shapeColorBox.className = 'color-box';
+                shapeColorBox.style.backgroundColor = defect.color;
+                shapeDiv.appendChild(shapeColorBox);
+                shapeDiv.appendChild(document.createTextNode(defect.text));
+                coordinatesDiv.appendChild(shapeDiv);
             });
         }
+    }
 
-        function undo() {
-            if (undoStack.length > 0) {
-                const lastState = undoStack.pop();
-                shapes.length = 0;
-                shapes.push(...lastState.shapes);
-                context.putImageData(lastState.image, 0, 0);
+    function getDefectNameByColor(color) {
+        const defectCheckboxes = document.querySelectorAll('input[name="defect"]');
+        for (let i = 0; i < defectCheckboxes.length; i++) {
+            if (defectCheckboxes[i].value === color) {
+                return defectCheckboxes[i].nextSibling.nodeValue.trim();
+            }
+        }
+        const defectSelect = document.getElementById('defectType');
+        const options = defectSelect.options;
+        for (let i = 0; i < options.length; i++) {
+            if (options[i].value === color) {
+                return options[i].text;
+            }
+        }
+        return 'Unknown Defect';
+    }
+
+    canvas.addEventListener('mousedown', (e) => {
+        isDrawing = true;
+        startX = e.offsetX;
+        startY = e.offsetY;
+        if (drawingMode === 'freeDraw') {
+            shapes.push({type: 'freeDraw', points: [{x: startX, y: startY}], color: currentColor});
+        }
+    });
+
+    canvas.addEventListener('mousemove', (e) => {
+        if (isDrawing) {
+            if (drawingMode === 'freeDraw') {
+                const currentShape = shapes[shapes.length - 1];
+                currentShape.points.push({x: e.offsetX, y: e.offsetY});
+                drawFreeLine(currentShape.points, currentShape.color, true);
+            } else {
+                redraw();
+                if (drawingMode === 'rectangle') {
+                    drawRectangle(startX, startY, e.offsetX, e.offsetY, currentColor, true);
+                } else if (drawingMode === 'circle') {
+                    drawCircle(startX, startY, e.offsetX, e.offsetY, currentColor, true);
+                } else if (drawingMode === 'line') {
+                    drawLine(startX, startY, e.offsetX, e.offsetY, currentColor, true);
+                }
+            }
+        }
+    });
+
+    canvas.addEventListener('mouseup', (e) => {
+        if (isDrawing) {
+            isDrawing = false;
+            if (drawingMode === 'freeDraw') {
+                saveState();
+                updateCoordinates();
+            } else {
+                const shape = {x1: startX, y1: startY, x2: e.offsetX, y2: e.offsetY, color: currentColor};
+                shape.type = drawingMode;
+                shapes.push(shape);
+                saveState();
+                redraw();
                 updateCoordinates();
             }
         }
+    });
 
-        function redo() {
-            // Implement redo functionality if needed
+    canvas.addEventListener('mouseout', () => {
+        if (isDrawing) {
+            isDrawing = false;
         }
+    });
 
-        function redraw() {
-            context.clearRect(0, 0, canvas.width, canvas.height);
+    function drawRectangle(x1, y1, x2, y2, color, drawLive) {
+        context.strokeStyle = color;
+        context.lineWidth = 3;
+        context.beginPath();
+        context.rect(Math.min(x1, x2), Math.min(y1, y2), Math.abs(x2 - x1), Math.abs(y2 - y1));
+        context.stroke();
+        if (drawLive) {
+            context.closePath();
+        }
+    }
+
+    function drawCircle(x1, y1, x2, y2, color, drawLive) {
+        context.strokeStyle = color;
+        context.lineWidth = 3;
+        context.beginPath();
+        const radius = Math.sqrt(Math.pow(x2 - x1, 2) + Math.pow(y2 - y1, 2));
+        context.arc(x1, y1, radius, 0, 2 * Math.PI);
+        context.stroke();
+        if (drawLive) {
+            context.closePath();
+        }
+    }
+
+    function drawLine(x1, y1, x2, y2, color, drawLive) {
+        context.strokeStyle = color;
+        context.lineWidth = 3;
+        context.beginPath();
+        context.moveTo(x1, y1);
+        context.lineTo(x2, y2);
+        context.stroke();
+        if (drawLive) {
+            context.closePath();
+        }
+    }
+
+    function drawFreeLine(points, color, drawLive) {
+        context.strokeStyle = color;
+        context.lineWidth = 3;
+        context.beginPath();
+        context.moveTo(points[0].x, points[0].y);
+        for (let i = 1; i < points.length; i++) {
+            context.lineTo(points[i].x, points[i].y);
+        }
+        context.stroke();
+        if (drawLive) {
+            context.closePath();
+        }
+    }
+
+    document.getElementById('undoBtn').addEventListener('click', () => {
+        undo();
+    });
+
+    document.getElementById('redoBtn').addEventListener('click', () => {
+        redo();
+    });
+
+    document.getElementById('saveBtn').addEventListener('click', () => {
+        const dataURL = canvas.toDataURL('image/png');
+        const link = document.createElement('a');
+        link.href = dataURL;
+        link.download = 'annotated_image.png';
+        link.click();
+    });
+
+    document.addEventListener('DOMContentLoaded', (event) => {
+        new ClipboardJS('#copyBtn');
+    });
+
+    document.getElementById('copyBtn').addEventListener('click', () => {
+        const coordinatesDiv = document.getElementById('coordinates');
+        const text = coordinatesDiv.innerText;
+        navigator.clipboard.writeText(text).then(() => {
+            console.log('Координаты дефектов скопированы в буфер обмена!');
+        }).catch(err => {
+            console.error('Ошибка при копировании координат: ', err);
+        });
+    });
+
+    // Load the image
+    const urlParams = new URLSearchParams(window.location.search);
+    const imageUrl = urlParams.get('image');
+    let image = new Image();
+    if (imageUrl) {
+        image.src = imageUrl;
+        image.onload = () => {
             context.drawImage(image, 0, 0, canvas.width, canvas.height);
-            shapes.forEach(shape => {
-                if (shape.type === 'rectangle') {
-                    drawRectangle(shape.x1, shape.y1, shape.x2, shape.y2, shape.color, false);
-                } else if (shape.type === 'circle') {
-                    drawCircle(shape.x1, shape.y1, shape.x2, shape.y2, shape.color, false);
-                } else if (shape.type === 'line') {
-                    drawLine(shape.x1, shape.y1, shape.x2, shape.y2, shape.color, false);
-                } else if (shape.type === 'freeDraw') {
-                    drawFreeLine(shape.points, shape.color, false);
-                }
-            });
-        }
-
-        function updateCoordinates() {
-            const coordinatesDiv = document.getElementById('coordinates');
-            coordinatesDiv.innerHTML = '';
-            const defectGroups = {};
-
-            shapes.forEach((shape, index) => {
-                const defectName = getDefectNameByColor(shape.color);
-                if (!defectGroups[defectName]) {
-                    defectGroups[defectName] = [];
-                }
-                let shapeText = `${defectName} ${defectGroups[defectName].length + 1}: `;
-                if (shape.type === 'rectangle') {
-                    shapeText += `(${shape.x1}, ${shape.y1}) - (${shape.x2}, ${shape.y2})`;
-                } else if (shape.type === 'circle') {
-                    shapeText += `(${shape.x1}, ${shape.y1}) - (${shape.x2}, ${shape.y2})`;
-                } else if (shape.type === 'line') {
-                    shapeText += `(${shape.x1}, ${shape.y1}) - (${shape.x2}, ${shape.y2})`;
-                }
-                defectGroups[defectName].push({ text: shapeText, color: shape.color });
-            });
-
-            for (const defectName in defectGroups) {
-                defectGroups[defectName].forEach(defect => {
-                    const shapeDiv = document.createElement('div');
-                    shapeDiv.style.marginBottom = '10px';
-                    shapeDiv.style.display = 'flex';
-                    shapeDiv.style.alignItems = 'center';
-
-                    const shapeColorBox = document.createElement('span');
-                    shapeColorBox.className = 'color-box';
-                    shapeColorBox.style.backgroundColor = defect.color;
-                    shapeDiv.appendChild(shapeColorBox);
-                    shapeDiv.appendChild(document.createTextNode(defect.text));
-                    coordinatesDiv.appendChild(shapeDiv);
-                });
-            }
-        }
-
-        function getDefectNameByColor(color) {
-            const defectCheckboxes = document.querySelectorAll('input[name="defect"]');
-            for (let i = 0; i < defectCheckboxes.length; i++) {
-                if (defectCheckboxes[i].value === color) {
-                    return defectCheckboxes[i].nextSibling.nodeValue.trim();
-                }
-            }
-            const defectSelect = document.getElementById('defectType');
-            const options = defectSelect.options;
-            for (let i = 0; i < options.length; i++) {
-                if (options[i].value === color) {
-                    return options[i].text;
-                }
-            }
-            return 'Unknown Defect';
-        }
-
-        canvas.addEventListener('mousedown', (e) => {
-            isDrawing = true;
-            startX = e.offsetX;
-            startY = e.offsetY;
-            if (drawingMode === 'freeDraw') {
-                shapes.push({type: 'freeDraw', points: [{x: startX, y: startY}], color: currentColor});
-            }
-        });
-
-        canvas.addEventListener('mousemove', (e) => {
-            if (isDrawing) {
-                if (drawingMode === 'freeDraw') {
-                    const currentShape = shapes[shapes.length - 1];
-                    currentShape.points.push({x: e.offsetX, y: e.offsetY});
-                    drawFreeLine(currentShape.points, currentShape.color, true);
-                } else {
-                    redraw();
-                    if (drawingMode === 'rectangle') {
-                        drawRectangle(startX, startY, e.offsetX, e.offsetY, currentColor, true);
-                    } else if (drawingMode === 'circle') {
-                        drawCircle(startX, startY, e.offsetX, e.offsetY, currentColor, true);
-                    } else if (drawingMode === 'line') {
-                        drawLine(startX, startY, e.offsetX, e.offsetY, currentColor, true);
-                    }
-                }
-            }
-        });
-
-        canvas.addEventListener('mouseup', (e) => {
-            if (isDrawing) {
-                isDrawing = false;
-                if (drawingMode === 'freeDraw') {
-                    saveState();
-                    updateCoordinates();
-                } else {
-                    const shape = {x1: startX, y1: startY, x2: e.offsetX, y2: e.offsetY, color: currentColor};
-                    shape.type = drawingMode;
-                    shapes.push(shape);
-                    saveState();
-                    redraw();
-                    updateCoordinates();
-                }
-            }
-        });
-
-        canvas.addEventListener('mouseout', () => {
-            if (isDrawing) {
-                isDrawing = false;
-            }
-        });
-
-        function drawRectangle(x1, y1, x2, y2, color, drawLive) {
-            context.strokeStyle = color;
-            context.lineWidth = 3;
-            context.beginPath();
-            context.rect(Math.min(x1, x2), Math.min(y1, y2), Math.abs(x2 - x1), Math.abs(y2 - y1));
-            context.stroke();
-            if (drawLive) {
-                context.closePath();
-            }
-        }
-
-        function drawCircle(x1, y1, x2, y2, color, drawLive) {
-            context.strokeStyle = color;
-            context.lineWidth = 3;
-            context.beginPath();
-            const radius = Math.sqrt(Math.pow(x2 - x1, 2) + Math.pow(y2 - y1, 2));
-            context.arc(x1, y1, radius, 0, 2 * Math.PI);
-            context.stroke();
-            if (drawLive) {
-                context.closePath();
-            }
-        }
-
-        function drawLine(x1, y1, x2, y2, color, drawLive) {
-            context.strokeStyle = color;
-            context.lineWidth = 3;
-            context.beginPath();
-            context.moveTo(x1, y1);
-            context.lineTo(x2, y2);
-            context.stroke();
-            if (drawLive) {
-                context.closePath();
-            }
-        }
-
-        function drawFreeLine(points, color, drawLive) {
-            context.strokeStyle = color;
-            context.lineWidth = 3;
-            context.beginPath();
-            context.moveTo(points[0].x, points[0].y);
-            for (let i = 1; i < points.length; i++) {
-                context.lineTo(points[i].x, points[i].y);
-            }
-            context.stroke();
-            if (drawLive) {
-                context.closePath();
-            }
-        }
-
-        document.getElementById('undoBtn').addEventListener('click', () => {
-            undo();
-        });
-
-        document.getElementById('redoBtn').addEventListener('click', () => {
-            redo();
-        });
-
-        document.getElementById('saveBtn').addEventListener('click', () => {
-            const dataURL = canvas.toDataURL('image/png');
-            const link = document.createElement('a');
-            link.href = dataURL;
-            link.download = 'annotated_image.png';
-            link.click();
-        });
-
-        document.getElementById('copyBtn').addEventListener('click', () => {
-            const coordinatesDiv = document.getElementById('coordinates');
-            const text = coordinatesDiv.innerText;
-            navigator.clipboard.writeText(text).then(() => {
-                console.log('Координаты дефектов скопированы в буфер обмена!');
-            }).catch(err => {
-                console.error('Ошибка при копировании координат: ', err);
-            });
-        });
-
-        // Load the image
-        const urlParams = new URLSearchParams(window.location.search);
-        const imageUrl = urlParams.get('image');
-        let image = new Image();
-        if (imageUrl) {
-            image.src = imageUrl;
-            image.onload = () => {
-                context.drawImage(image, 0, 0, canvas.width, canvas.height);
-                saveState();
-            };
-        }
+            saveState();
+        };
+    }
     </script>
 </body>
 </html>

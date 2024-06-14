@@ -4,6 +4,7 @@ import telebot
 import csv
 from telebot import types
 import time
+from datetime import datetime
 from google.oauth2.service_account import Credentials
 from googleapiclient.discovery import build
 from googleapiclient.http import MediaFileUpload
@@ -13,14 +14,14 @@ logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(name)s - %(level
 logger = logging.getLogger(__name__)
 
 # Вставьте сюда токен своего бота
-API_TOKEN = '6885524246:AAHnUb7W71CbTofNMw4YrnyLb-bnloBoc4I'
+API_TOKEN = '7322233778:AAHxgxNC_6dRnsJJeXhlyyw4ajBPu4ELUEk'
 bot = telebot.TeleBot(API_TOKEN)
 
 # Папки для сохранения изображений
 IMAGE_FOLDER = 'images'
 ANNOTATED_IMAGE_FOLDER = 'annotated_images'
 CSV_FILE_PATH = 'weld_defects.csv'
-WEB_APP_URL = 'http://65.108.250.169/draw.html?image=images/'  # Убедитесь, что путь соответствует вашему серверу
+WEB_APP_URL = 'http://localhost:8000/draw.html?image=images/'  # Убедитесь, что путь соответствует вашему серверу
 
 # Google Drive API настройки
 SERVICE_ACCOUNT_FILE = 'tgbot2-426018-f1f15b697496.json'
@@ -53,7 +54,9 @@ if not os.path.exists(CSV_FILE_PATH):
             'Сила тока',
             'Ссылка на изображение',
             'Ссылка на аннотированное изображение',
-            'Дефекты'
+            'Дефекты',
+            'Дата',
+            'Время'
         ]
         writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
         writer.writeheader()
@@ -400,6 +403,10 @@ def save_data_to_file(chat_id):
 
         file_exists = os.path.isfile(CSV_FILE_PATH)
 
+        current_time = datetime.now()
+        current_date_str = current_time.strftime('%Y-%m-%d')
+        current_time_str = current_time.strftime('%H:%M:%S')
+
         with open(CSV_FILE_PATH, 'a', newline='', encoding='utf-8') as csvfile:
             fieldnames = [
                 'ФИО',
@@ -413,7 +420,9 @@ def save_data_to_file(chat_id):
                 'Сила тока',
                 'Ссылка на изображение',
                 'Ссылка на аннотированное изображение',
-                'Дефекты'
+                'Дефекты',
+                'Дата',
+                'Время'
             ]
             writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
 
@@ -432,7 +441,9 @@ def save_data_to_file(chat_id):
                 'Сила тока': welding_params.get("current", ""),
                 'Ссылка на изображение': file_url,
                 'Ссылка на аннотированное изображение': annotated_google_drive_url,
-                'Дефекты': defects
+                'Дефекты': defects,
+                'Дата': current_date_str,
+                'Время': current_time_str
             }
             writer.writerow(row)
 
